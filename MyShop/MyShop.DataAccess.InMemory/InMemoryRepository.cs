@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyShop.DataAccess.InMemory
 {
-    public class InMemoryRepository<T> where T : BaseEntity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly ObjectCache _cache = MemoryCache.Default;
         readonly List<T> _items;
