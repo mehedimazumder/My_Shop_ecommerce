@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyShop.Core.Contracts;
 using MyShop.Core.Models;
 using MyShop.DataAccess.InMemory;
 
@@ -46,9 +47,9 @@ namespace MyShop.WebUI.Controllers
 
         }
 
-        public ActionResult Edit(string Id)
+        public ActionResult Edit(string id)
         {
-            ProductCategory productCategory = context.Find(Id);
+            ProductCategory productCategory = context.Find(id);
             if (productCategory == null)
             {
                 return HttpNotFound();
@@ -60,9 +61,9 @@ namespace MyShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductCategory product, string Id)
+        public ActionResult Edit(ProductCategory product, string id)
         {
-            ProductCategory productCategoryToEdit = context.Find(Id);
+            ProductCategory productCategoryToEdit = context.Find(id);
 
             if (productCategoryToEdit == null)
             {
@@ -83,9 +84,9 @@ namespace MyShop.WebUI.Controllers
             }
         }
 
-        public ActionResult Delete(string Id)
+        public ActionResult Delete(string id)
         {
-            ProductCategory productCategoryToDelete = context.Find(Id);
+            ProductCategory productCategoryToDelete = context.Find(id);
 
             if (productCategoryToDelete == null)
             {
@@ -99,9 +100,9 @@ namespace MyShop.WebUI.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
-        public ActionResult ConfirmDelete(string Id)
+        public ActionResult ConfirmDelete(string id)
         {
-            ProductCategory productCategoryToDelete = context.Find(Id);
+            ProductCategory productCategoryToDelete = context.Find(id);
 
             if (productCategoryToDelete == null)
             {
@@ -109,7 +110,8 @@ namespace MyShop.WebUI.Controllers
             }
             else
             {
-                context.Delete(Id);
+                context.Delete(id);
+                context.Commit();
                 return RedirectToAction("Index");
             }
         }
