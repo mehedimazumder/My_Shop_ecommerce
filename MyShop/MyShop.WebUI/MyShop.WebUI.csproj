@@ -188,6 +188,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductCategoryManagerController.cs" />
@@ -266,6 +267,8 @@
     <Content Include="Views\ProductCategoryManager\Edit.cshtml" />
     <Content Include="Views\ProductCategoryManager\Delete.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\_CartSummaryPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,6 +299,10 @@
     <ProjectReference Include="..\MyShop.DataAccess.SQL\MyShop.DataAccess.SQL.csproj">
       <Project>{8947D53B-B608-4F35-94BB-3FB91F15E589}</Project>
       <Name>MyShop.DataAccess.SQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyShop.Services\MyShop.Services.csproj">
+      <Project>{2D78DADA-D6B8-4BFD-B6B9-64AA8A807140}</Project>
+      <Name>MyShop.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
