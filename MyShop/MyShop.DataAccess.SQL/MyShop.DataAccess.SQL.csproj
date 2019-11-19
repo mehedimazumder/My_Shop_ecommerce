@@ -61,6 +61,14 @@
     <Compile Include="Migrations\201911191351316_AddCustomerTable.Designer.cs">
       <DependentUpon>201911191351316_AddCustomerTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911191817260_AddOrderAndOrderItemTable.cs" />
+    <Compile Include="Migrations\201911191817260_AddOrderAndOrderItemTable.Designer.cs">
+      <DependentUpon>201911191817260_AddOrderAndOrderItemTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911191833397_AddOrderAndOrderItemTable1.cs" />
+    <Compile Include="Migrations\201911191833397_AddOrderAndOrderItemTable1.Designer.cs">
+      <DependentUpon>201911191833397_AddOrderAndOrderItemTable1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -84,6 +92,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911191351316_AddCustomerTable.resx">
       <DependentUpon>201911191351316_AddCustomerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911191817260_AddOrderAndOrderItemTable.resx">
+      <DependentUpon>201911191817260_AddOrderAndOrderItemTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911191833397_AddOrderAndOrderItemTable1.resx">
+      <DependentUpon>201911191833397_AddOrderAndOrderItemTable1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
