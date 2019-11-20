@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -23,12 +24,13 @@ namespace MyShop.WebUI.Tests.Controllers
             IRepository<Cart> carts = new MockContext<Cart>();
             IRepository<Product>products = new MockContext<Product>();
             IRepository<Order>Orders = new MockContext<Order>();
+            IRepository<Customer> customers = new MockContext<Customer>();
 
             var httpContext = new MockHttpContext();
 
             ICartService cartService = new CartService(products, carts);
             IOrderService orderService = new OrderService(Orders);
-            var controller = new CartController(cartService, orderService);
+            var controller = new CartController(cartService, orderService, customers);
             controller.ControllerContext = new ControllerContext(httpContext, new RouteData(), controller);
 
             //Act
@@ -49,6 +51,7 @@ namespace MyShop.WebUI.Tests.Controllers
             IRepository<Cart> carts = new MockContext<Cart>();
             IRepository<Product> products = new MockContext<Product>();
             IRepository<Order> Orders = new MockContext<Order>();
+            IRepository<Customer> customers = new MockContext<Customer>();
 
 
             products.Insert(new Product() { Id = "1", Price = 10.00m });
@@ -61,7 +64,7 @@ namespace MyShop.WebUI.Tests.Controllers
 
             ICartService cartService = new CartService(products, carts);
             IOrderService orderService = new OrderService(Orders);
-            var controller = new CartController(cartService, orderService);
+            var controller = new CartController(cartService, orderService, customers);
 
             var httpContext = new MockHttpContext();
             httpContext.Request.Cookies.Add(new System.Web.HttpCookie("eCommercecart") { Value = cart.Id });
@@ -78,6 +81,7 @@ namespace MyShop.WebUI.Tests.Controllers
         [TestMethod]
         public void CanCheckOutAndCreateOrder()
         {
+            IRepository<Customer> customers = new MockContext<Customer>();
             IRepository<Product> products = new MockContext<Product>();
             products.Insert(new Product(){ Id = "1", Price = 10.00m});
             products.Insert(new Product(){ Id = "2", Price = 2.00m});
@@ -94,8 +98,13 @@ namespace MyShop.WebUI.Tests.Controllers
             IRepository<Order> orders = new MockContext<Order>();
             IOrderService orderService = new OrderService(orders);
 
-            var controller = new CartController(cartService, orderService);
+            customers.Insert(new Customer(){ Id = "1", Email = "m@m.com", ZipCode = "123"});
+
+            IPrincipal FakeUser = new GenericPrincipal(new GenericIdentity("m@m.com", "forms"), null);
+
+            var controller = new CartController(cartService, orderService, customers);
             var httpContext = new MockHttpContext();
+            httpContext.User = FakeUser;
             httpContext.Request.Cookies.Add(new HttpCookie("eCommercecart")
             {
                 Value = cart.Id
